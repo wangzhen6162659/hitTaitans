@@ -86,9 +86,9 @@ cc.Class({
             var bossType = this.level % 2 + 1;
             var skeStr = 'sprint/boss' + bossType;
             this.node.addChild(this.boss)
-            this.node.scale = 0;
+            this.boss.scale = 0;
             var act = cc.scaleTo(0.3, scale, scale);
-            this.node.runAction(act)
+            this.boss.runAction(act)
             this.getDragon(this.boss.getComponent(dragonBones.ArmatureDisplay), skeStr , 'Armature', this.attackedArr[0]);
             this.bloodStrip.getComponent('bloodLife').initNode(bossLevel);
         }
@@ -131,6 +131,13 @@ cc.Class({
     destroyBoss() {
         this.boss.destroy();
         this.boss = null;
+        for(var i=0; i<this.level; i++){
+            var oneMoneyVal = this.level;
+            var moneyPrefab = cc.instantiate(this.moneyNode);
+            moneyPrefab.zIndex = 1001;
+            moneyPrefab.getComponent('moneyLife').initVal(oneMoneyVal);
+            this.node.addChild(moneyPrefab);
+        }
         this.level += 1;
         this.addBoss();
     },

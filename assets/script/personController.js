@@ -67,7 +67,7 @@ cc.Class({
             }
             this.currentAct = _armatureDisplay.animationName
             _armatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.normalAction, this);
-            this.boss.getComponent("bossController").attacked(13);
+            this.boss.getComponent("bossController").attacked(500);
         },this)
 
     },

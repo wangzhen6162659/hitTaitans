@@ -98,7 +98,13 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "moneyEndNode": null,
+    "time": 0,
+    "speedY": 0,
+    "speedX": 0,
+    "monVal": 0,
+    "overTag": false
   },
   {
     "__type__": "cc.PrefabInfo",

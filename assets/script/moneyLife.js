@@ -27,9 +27,15 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        moneyEndNode: {
+            default: null,
+            type: cc.Node
+        },
         time: 0,
         speedY: 0,
-        speedX: 0
+        speedX: 0,
+        monVal: 0,
+        overTag: false
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -37,14 +43,18 @@ cc.Class({
     // onLoad () {},
 
     start() {
-        this.speedY = this.randomNum(50, 60);
+        this.speedY = this.randomNum(10, 20);
         this.speedX = this.randomNum(-8, 8);
-        console.log(this.node.y)
+        this.moneyEndNode = this.node.parent.getChildByName('moneyEnd');
     },
 
     gravitySpeedY() {
         if (this.node.y > 0) {
-            this.node.y += this.speedY;
+            var y = this.speedY;
+            if (this.node.y + y < 0) {
+                y = 0 - this.node.y;
+            }
+            this.node.y += y;
         }
     },
 
@@ -54,24 +64,57 @@ cc.Class({
         }
     },
 
+    initVal (value) {
+        this.monVal = value;
+    },
+
     update(dt) {
         this.time += dt;
         this.speedY -= 1 / 2 * 10 * Math.pow(this.time, 2);
-        this.gravitySpeedY();
-        this.gravitySpeedX();
+        if (!this.overTag) {
+            if (this.time > 2) {
+                this.overTag = true;
+                this.bezerTo();
+            } else {
+                this.gravitySpeedY();
+                this.gravitySpeedX();
+            }
+        }
+
     },
 
-    randomNum(minNum,maxNum){ 
-        switch(arguments.length){ 
-            case 1: 
-                return parseFloat(Math.random()*minNum+1,10); 
-            break; 
-            case 2: 
-                return parseFloat(Math.random()*(maxNum-minNum+1)+minNum,10); 
-            break; 
-                default: 
-                    return 0; 
-                break; 
-        } 
+    randomNum(minNum, maxNum) {
+        switch (arguments.length) {
+            case 1:
+                return parseFloat(Math.random() * minNum + 1, 10);
+                break;
+            case 2:
+                return parseFloat(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                break;
+            default:
+                return 0;
+                break;
+        }
+    },
+
+    bezerTo() {
+        var beginY = this.randomNum(100, 400);
+        var beginX = this.randomNum(-500, 500);
+        var midY = this.randomNum(800, 1600);
+        var midX = this.randomNum(-500, 500);
+        var moneyIcon = this.moneyEndNode.getChildByName('moneyIcon');
+        console.log
+        var bezier = [cc.v2(beginX, beginY), cc.v2(midX, midY), cc.v2(this.moneyEndNode.x + moneyIcon.x, this.moneyEndNode.y + moneyIcon.y)];
+        var bezierTo = cc.sequence(cc.bezierTo(1, bezier),cc.callFunc(function(){
+            // this.node.destory();
+            this.destroyMoney();
+        },this));
+        this.node.runAction(bezierTo);
+    },
+
+    destroyMoney () {
+        this.moneyEndNode.getComponent('moneyEndController').addVal(this.monVal);
+        this.node.destroy();
     }
+
 });
