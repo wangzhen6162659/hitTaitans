@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "2a46c172-4b8f-47ae-938f-d2bd34fcc0b0",
+  "atlasJson": "{\"width\":512,\"height\":256,\"name\":\"boss2\",\"imagePath\":\"boss2_tex.png\",\"SubTexture\":[{\"width\":13,\"y\":104,\"height\":38,\"name\":\"boss2/图层_2_拷贝\",\"x\":386},{\"width\":13,\"y\":104,\"height\":38,\"name\":\"boss2/图层_2_拷贝_3\",\"x\":371},{\"width\":13,\"y\":91,\"height\":38,\"name\":\"boss2/图层_35\",\"x\":433},{\"width\":13,\"y\":97,\"height\":38,\"name\":\"boss2/图层_2_拷贝_2\",\"x\":406},{\"width\":66,\"y\":65,\"height\":24,\"name\":\"boss2/图层_37\",\"x\":439},{\"width\":172,\"y\":1,\"height\":122,\"name\":\"boss2/图层_38\",\"x\":197},{\"width\":194,\"y\":1,\"height\":234,\"name\":\"boss2/图层_39\",\"x\":1},{\"width\":25,\"y\":69,\"height\":26,\"name\":\"boss2/图层_40\",\"x\":406},{\"width\":19,\"y\":91,\"height\":23,\"name\":\"boss2/图层_7_拷贝\",\"x\":448},{\"width\":19,\"y\":91,\"height\":21,\"name\":\"boss2/图层_7_拷贝_2\",\"x\":469},{\"width\":22,\"y\":38,\"height\":22,\"name\":\"boss2/图层_7_拷贝_3\",\"x\":471},{\"width\":30,\"y\":1,\"height\":62,\"name\":\"boss2/图层_41\",\"x\":439},{\"width\":66,\"y\":1,\"height\":66,\"name\":\"boss2/椭圆_1\",\"x\":371},{\"width\":33,\"y\":69,\"height\":33,\"name\":\"boss2/椭圆_1_拷贝_2\",\"x\":371},{\"width\":36,\"y\":1,\"height\":35,\"name\":\"boss2/椭圆_1_拷贝\",\"x\":471},{\"width\":18,\"y\":91,\"height\":18,\"name\":\"boss2/椭圆_1_拷贝_3\",\"x\":490}]}",
+  "texture": "ce73666d-5202-432b-9feb-b58f722cc9cb",
+  "subMetas": {}
+}

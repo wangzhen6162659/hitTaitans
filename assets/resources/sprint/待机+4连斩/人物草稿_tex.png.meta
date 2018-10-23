@@ -1,0 +1,30 @@
+{
+  "ver": "2.0.0",
+  "uuid": "225b9932-5eb9-4eb8-9a71-b1aaa2c9f672",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "人物草稿_tex": {
+      "ver": "1.0.3",
+      "uuid": "cfb86582-621b-4088-8029-69745d5e9828",
+      "rawTextureUuid": "225b9932-5eb9-4eb8-9a71-b1aaa2c9f672",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -5.5,
+      "offsetY": 31.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 243,
+      "height": 191,
+      "rawWidth": 256,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
