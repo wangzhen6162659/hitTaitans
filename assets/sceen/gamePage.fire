@@ -454,7 +454,10 @@
     "node": {
       "__id__": 5
     },
-    "_enabled": true
+    "_enabled": true,
+    "moneyAllVal": 0,
+    "time": 0,
+    "floatTag": false
   },
   {
     "__type__": "cc.Node",
