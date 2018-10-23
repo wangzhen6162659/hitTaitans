@@ -41,38 +41,56 @@ cc.Class({
         },
         //伤害
         hurt: 0,
-        level: 0,
-        blood: {
-            default:null,
-            type: cc.Sprite
-        },
+        level: 1,
         boss: {
             default: null,
             type: cc.Node
+        },
+        bloodStrip: {
+            default: null,
+            type:cc.Node
+        },
+        levelNode: {
+            default: null,
+            type:cc.Node
+        },
+        moneyNode: {
+            default: null,
+            type:cc.Prefab
         }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
+    // onLoad() {
+    // },
+    start (){
         this.attackedArr = ["待机","被攻击"];
         this.addBoss();
     },
 
     addBoss() {
         // let boss = this.bossPool.get();
+        this.levelNode.getComponent(cc.Label).string = this.level;
         if(this.boss == null){
+            //boss尺寸
+            var scale = 1;
+            //boss等级
+            var bossLevel = this.level;
             this.boss = cc.instantiate(this.bossPrefeb);
             this.boss.zIndex = 1000
-            this.level += 1;
+            if(this.level % 5 == 0){
+                scale = scale * 1.5;
+                bossLevel = bossLevel *1.5;
+            }
             var bossType = this.level % 2 + 1;
             var skeStr = 'sprint/boss' + bossType;
             this.node.addChild(this.boss)
             this.node.scale = 0;
-            var act = cc.scaleTo(0.3, 1, 1);
+            var act = cc.scaleTo(0.3, scale, scale);
             this.node.runAction(act)
             this.getDragon(this.boss.getComponent(dragonBones.ArmatureDisplay), skeStr , 'Armature', this.attackedArr[0]);
-            this.boss.getChildByName('blood').getComponent('bloodLife').initNode(this.level);
+            this.bloodStrip.getComponent('bloodLife').initNode(bossLevel);
         }
     },
     getDragon (animationDisplay, path, armatureName, newAnimation) {
@@ -93,9 +111,6 @@ cc.Class({
             animationDisplay.playAnimation(newAnimation, 0);
         })
     },
-    start() {
-
-    },
     /**
      * boss被攻击
      * @param {*} hurt 
@@ -104,7 +119,7 @@ cc.Class({
         this.getBossParams();
         var _armatureDisplay = this.boss.getComponent(dragonBones.ArmatureDisplay);
         this.loadDragonBones(_armatureDisplay, 'Armature', this.attackedArr[1]);
-        var newVal = this.boss.getChildByName('blood').getComponent('bloodLife').sub(hurt);
+        var newVal = this.bloodStrip.getComponent('bloodLife').sub(hurt);
         this.addHurt(hurt);
         if (newVal == 1){
             this.destroyBoss();
@@ -116,6 +131,7 @@ cc.Class({
     destroyBoss() {
         this.boss.destroy();
         this.boss = null;
+        this.level += 1;
         this.addBoss();
     },
     /**

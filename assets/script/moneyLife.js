@@ -27,44 +27,51 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        hpNode: {
-            default: null,
-            type: cc.Node
-        },
-        
-        hpValNode: {
-            default: null,
-            type: cc.Node
-        },
-        //血条总长比
-        hp: 0,
-        //血条背景
-        hpBack: 0,
-        //血条数值总量
-        hpVal: 0,
+        time: 0,
+        speedY: 0,
+        speedX: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
-    onLoad() {
-        this.hpNode = this.node.getChildByName('blood');
-        this.hpValNode = this.node.getChildByName('hp_val');
+    start() {
+        this.speedY = this.randomNum(50, 60);
+        this.speedX = this.randomNum(-8, 8);
+        console.log(this.node.y)
     },
 
-    sub(hurt) {
-        let fill_start = this.hpNode.getComponent(cc.Sprite);
-        fill_start.fillStart = fill_start.fillStart + hurt / this.hpVal;
-        hurt = parseInt(this.hpValNode.getComponent(cc.Label).string) - hurt;
-        this.hpValNode.getComponent(cc.Label).string = hurt;
-        return fill_start.fillStart;
+    gravitySpeedY() {
+        if (this.node.y > 0) {
+            this.node.y += this.speedY;
+        }
     },
 
-    initNode(level) {
-        this.hpNode.getComponent(cc.Sprite).fillStart = 0;
-        this.hpVal = level * 10;
-        this.hpValNode.getComponent(cc.Label).string = this.hpVal;
+    gravitySpeedX() {
+        if (this.node.y > 0) {
+            this.node.x += this.speedX;
+        }
+    },
+
+    update(dt) {
+        this.time += dt;
+        this.speedY -= 1 / 2 * 10 * Math.pow(this.time, 2);
+        this.gravitySpeedY();
+        this.gravitySpeedX();
+    },
+
+    randomNum(minNum,maxNum){ 
+        switch(arguments.length){ 
+            case 1: 
+                return parseFloat(Math.random()*minNum+1,10); 
+            break; 
+            case 2: 
+                return parseFloat(Math.random()*(maxNum-minNum+1)+minNum,10); 
+            break; 
+                default: 
+                    return 0; 
+                break; 
+        } 
     }
-    // update (dt) {},
 });

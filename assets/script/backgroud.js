@@ -27,44 +27,15 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        hpNode: {
-            default: null,
-            type: cc.Node
-        },
-        
-        hpValNode: {
-            default: null,
-            type: cc.Node
-        },
-        //血条总长比
-        hp: 0,
-        //血条背景
-        hpBack: 0,
-        //血条数值总量
-        hpVal: 0,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
-    onLoad() {
-        this.hpNode = this.node.getChildByName('blood');
-        this.hpValNode = this.node.getChildByName('hp_val');
+    start () {
+
     },
 
-    sub(hurt) {
-        let fill_start = this.hpNode.getComponent(cc.Sprite);
-        fill_start.fillStart = fill_start.fillStart + hurt / this.hpVal;
-        hurt = parseInt(this.hpValNode.getComponent(cc.Label).string) - hurt;
-        this.hpValNode.getComponent(cc.Label).string = hurt;
-        return fill_start.fillStart;
-    },
-
-    initNode(level) {
-        this.hpNode.getComponent(cc.Sprite).fillStart = 0;
-        this.hpVal = level * 10;
-        this.hpValNode.getComponent(cc.Label).string = this.hpVal;
-    }
     // update (dt) {},
 });
