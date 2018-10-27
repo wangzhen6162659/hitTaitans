@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "21c28bf3-f10a-4132-9175-46e3a6ffda42",
+  "atlasJson": "{\"SubTexture\":[{\"frameWidth\":490,\"y\":1,\"frameHeight\":490,\"width\":315,\"frameX\":-68,\"height\":295,\"name\":\"04\",\"frameY\":-84,\"x\":449},{\"frameWidth\":490,\"y\":1,\"frameHeight\":490,\"width\":446,\"frameX\":-13,\"height\":479,\"name\":\"05\",\"frameY\":-5,\"x\":1},{\"frameWidth\":490,\"y\":1,\"frameHeight\":490,\"width\":244,\"frameX\":-120,\"height\":245,\"name\":\"06\",\"frameY\":-108,\"x\":766},{\"frameWidth\":490,\"y\":298,\"frameHeight\":490,\"width\":186,\"frameX\":-137,\"height\":194,\"name\":\"02\",\"frameY\":-137,\"x\":449},{\"frameWidth\":490,\"y\":298,\"frameHeight\":490,\"width\":120,\"frameX\":-182,\"height\":133,\"name\":\"01\",\"frameY\":-170,\"x\":637},{\"frameWidth\":490,\"y\":248,\"frameHeight\":490,\"width\":227,\"frameX\":-126,\"height\":213,\"name\":\"03\",\"frameY\":-126,\"x\":766}],\"width\":1024,\"height\":512,\"name\":\"点击特效\",\"imagePath\":\"点击特效_tex.png\"}",
+  "texture": "fe4f9f78-758b-4ec1-9488-6f325e0c5211",
+  "subMetas": {}
+}

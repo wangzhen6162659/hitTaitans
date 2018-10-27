@@ -1,0 +1,30 @@
+{
+  "ver": "2.0.0",
+  "uuid": "fb68d598-03ea-4147-b3d8-c8b92d3d852f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "人物带刀光_tex": {
+      "ver": "1.0.3",
+      "uuid": "467f5695-714f-4063-ab6a-b1b042da9a16",
+      "rawTextureUuid": "fb68d598-03ea-4147-b3d8-c8b92d3d852f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 863,
+      "height": 768,
+      "rawWidth": 866,
+      "rawHeight": 771,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

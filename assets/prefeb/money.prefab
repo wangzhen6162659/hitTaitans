@@ -51,12 +51,12 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
+    "_scaleX": 0.5,
+    "_scaleY": 0.5,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 656
+      "y": 259
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -74,7 +74,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+      "__uuid__": "e9f32a18-2048-4fc3-9bff-87ccb901ec69"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -103,8 +103,11 @@
     "time": 0,
     "speedY": 0,
     "speedX": 0,
+    "speedXDirection": 1,
     "monVal": 0,
-    "overTag": false
+    "overTag": false,
+    "horizon": 258,
+    "xMax": 177
   },
   {
     "__type__": "cc.PrefabInfo",

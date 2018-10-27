@@ -34,8 +34,11 @@ cc.Class({
         time: 0,
         speedY: 0,
         speedX: 0,
+        speedXDirection: 1,
         monVal: 0,
-        overTag: false
+        overTag: false,
+        horizon: 262,
+        xMax: 177
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -49,18 +52,21 @@ cc.Class({
     },
 
     gravitySpeedY() {
-        if (this.node.y > 0) {
+        if (this.node.y > this.horizon) {
             var y = this.speedY;
-            if (this.node.y + y < 0) {
-                y = 0 - this.node.y;
+            if (this.node.y + y < this.horizon) {
+                y = this.horizon - this.node.y;
             }
             this.node.y += y;
         }
     },
 
     gravitySpeedX() {
-        if (this.node.y > 0) {
-            this.node.x += this.speedX;
+        if (Math.abs(this.node.x)>this.xMax){
+            this.speedXDirection = -1;
+        }
+        if (this.node.y > this.horizon) {
+            this.node.x += this.speedXDirection * this.speedX;
         }
     },
 
@@ -98,13 +104,12 @@ cc.Class({
     },
 
     bezerTo() {
-        var beginY = this.randomNum(100, 400);
-        var beginX = this.randomNum(-500, 500);
-        var midY = this.randomNum(800, 1600);
-        var midX = this.randomNum(-500, 500);
+        var beginY = this.randomNum(100, 350);
+        var beginX = this.randomNum(-170, 170);
+        var midY = this.randomNum(400, 1200);
+        var midX = this.randomNum(-170, 170);
         var moneyIcon = this.moneyEndNode.getChildByName('moneyIcon');
-        console.log
-        var bezier = [cc.v2(beginX, beginY), cc.v2(midX, midY), cc.v2(this.moneyEndNode.x + moneyIcon.x, this.moneyEndNode.y + moneyIcon.y)];
+        var bezier = [cc.v2(beginX, beginY), cc.v2(midX, midY), cc.v2(this.moneyEndNode.x + moneyIcon.x/2, this.moneyEndNode.y + moneyIcon.y)];
         var bezierTo = cc.sequence(cc.bezierTo(1, bezier),cc.callFunc(function(){
             // this.node.destory();
             this.destroyMoney();

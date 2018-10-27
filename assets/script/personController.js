@@ -43,18 +43,18 @@ cc.Class({
     },
 
     // LIFE-CYCLE CALLBACKS:
-
-    onLoad () {
+    test () {
         this.attack = ["待机","一斩","二斩","三斩","四斩"];
         var _armatureDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,function(event){
+        // this.node.parent.on(cc.Node.EventType.TOUCH_START, function(event){
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function(event){
             switch(this.currentAct){
                 case this.attack[0]:        
+                    _armatureDisplay.playAnimation(this.attack[1], 1);
+                    break;
+                case this.attack[1]:        
                     _armatureDisplay.playAnimation(this.attack[2], 1);
                     break;
-                // case this.attack[1]:        
-                //     _armatureDisplay.playAnimation(this.attack[2], 1);
-                //     break;
                 case this.attack[2]:        
                     _armatureDisplay.playAnimation(this.attack[3], 1);
                     break;
@@ -62,22 +62,47 @@ cc.Class({
                     _armatureDisplay.playAnimation(this.attack[4], 1);
                     break;
                 case this.attack[4]:        
-                    _armatureDisplay.playAnimation(this.attack[2], 1);
+                    _armatureDisplay.playAnimation(this.attack[1], 1);
                     break;
             }
             this.currentAct = _armatureDisplay.animationName
             _armatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.normalAction, this);
             this.boss.getComponent("bossController").attacked(500);
-        },this)
-
+        }, this )
     },
-
     normalAction: function (call) {
         this.node.getComponent(dragonBones.ArmatureDisplay).playAnimation(this.attack[0], 0);
     },
-
+    addTouchEvent:function(){
+        this.attack = ["待机","一斩","二斩","三斩","四斩"];
+        var _armatureDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
+        // this.node.parent.on(cc.Node.EventType.TOUCH_START, function(event){
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function(event){
+            switch(this.currentAct){
+                case this.attack[0]:        
+                    _armatureDisplay.playAnimation(this.attack[1], 1);
+                    break;
+                case this.attack[1]:        
+                    _armatureDisplay.playAnimation(this.attack[2], 1);
+                    break;
+                case this.attack[2]:        
+                    _armatureDisplay.playAnimation(this.attack[3], 1);
+                    break;
+                case this.attack[3]:        
+                    _armatureDisplay.playAnimation(this.attack[4], 1);
+                    break;
+                case this.attack[4]:        
+                    _armatureDisplay.playAnimation(this.attack[1], 1);
+                    break;
+            }
+            this.currentAct = _armatureDisplay.animationName
+            _armatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.normalAction, this);
+            this.boss.getComponent("bossController").attacked(500);
+        }, this )
+    },
     start () {
-
+        // this.addTouchEvent();
+        this.test();
     },
 
     // update (dt) {},

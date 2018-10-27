@@ -40,7 +40,7 @@ cc.Class({
     // onLoad () {},
 
     start() {
-
+        this.node.zIndex = 1001;
     },
 
     addVal(value) {

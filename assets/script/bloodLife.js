@@ -57,8 +57,11 @@ cc.Class({
         let fill_start = this.hpNode.getComponent(cc.Sprite);
         fill_start.fillStart = fill_start.fillStart + hurt / this.hpVal;
         hurt = parseInt(this.hpValNode.getComponent(cc.Label).string) - hurt;
+        if(hurt < 0){
+            return 0;
+        }
         this.hpValNode.getComponent(cc.Label).string = hurt;
-        return fill_start.fillStart;
+        return hurt;
     },
 
     initNode(level) {
