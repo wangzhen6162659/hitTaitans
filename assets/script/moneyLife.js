@@ -38,6 +38,7 @@ cc.Class({
         monVal: 0,
         overTag: false,
         horizon: 262,
+        revSpeedY: 0,
         xMax: 177
     },
 
@@ -46,7 +47,7 @@ cc.Class({
     // onLoad () {},
 
     start() {
-        this.speedY = this.randomNum(10, 20);
+        this.speedY = this.randomNum(8, 15);
         this.speedX = this.randomNum(-8, 8);
         this.moneyEndNode = this.node.parent.getChildByName('moneyEnd');
     },
@@ -56,13 +57,20 @@ cc.Class({
             var y = this.speedY;
             if (this.node.y + y < this.horizon) {
                 y = this.horizon - this.node.y;
+                this.revSpeedY = Math.abs(this.speedY)/5;
+                this.time = 0;
+                this.speedY = 0;
             }
             this.node.y += y;
+        } else {
+            if (this.revSpeedY >0.1){
+                this.node.y += this.speedY + this.revSpeedY;
+            }
         }
     },
 
     gravitySpeedX() {
-        if (Math.abs(this.node.x)>this.xMax){
+        if (Math.abs(this.node.x) > this.xMax) {
             this.speedXDirection = -1;
         }
         if (this.node.y > this.horizon) {
@@ -70,18 +78,18 @@ cc.Class({
         }
     },
 
-    initVal (value) {
+    initVal(value) {
         this.monVal = value;
     },
 
     update(dt) {
         this.time += dt;
-        this.speedY -= 1 / 2 * 10 * Math.pow(this.time, 2);
         if (!this.overTag) {
-            if (this.time > 2) {
+            if (this.time > 1) {
                 this.overTag = true;
                 this.bezerTo();
             } else {
+                this.speedY -= 1 / 2 * 10 * Math.pow(this.time, 2);
                 this.gravitySpeedY();
                 this.gravitySpeedX();
             }
@@ -109,15 +117,15 @@ cc.Class({
         var midY = this.randomNum(400, 1200);
         var midX = this.randomNum(-170, 170);
         var moneyIcon = this.moneyEndNode.getChildByName('moneyIcon');
-        var bezier = [cc.v2(beginX, beginY), cc.v2(midX, midY), cc.v2(this.moneyEndNode.x + moneyIcon.x/2, this.moneyEndNode.y + moneyIcon.y)];
-        var bezierTo = cc.sequence(cc.bezierTo(1, bezier),cc.callFunc(function(){
+        var bezier = [cc.v2(beginX, beginY), cc.v2(midX, midY), cc.v2(this.moneyEndNode.x + moneyIcon.x / 2, this.moneyEndNode.y + moneyIcon.y)];
+        var bezierTo = cc.sequence(cc.bezierTo(1, bezier), cc.callFunc(function () {
             // this.node.destory();
             this.destroyMoney();
-        },this));
+        }, this));
         this.node.runAction(bezierTo);
     },
 
-    destroyMoney () {
+    destroyMoney() {
         this.moneyEndNode.getComponent('moneyEndController').addVal(this.monVal);
         this.node.destroy();
     }

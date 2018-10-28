@@ -31,10 +31,15 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        
+
         hpValNode: {
             default: null,
             type: cc.Node
+        },
+
+        valueCompanyArr: {
+            default: null,
+            type: ['String']
         },
         //血条总长比
         hp: 0,
@@ -42,32 +47,66 @@ cc.Class({
         hpBack: 0,
         //血条数值总量
         hpVal: 0,
+        //血条数值总量
+        realHpVal: 0,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
     onLoad() {
         this.hpNode = this.node.getChildByName('blood');
         this.hpValNode = this.node.getChildByName('hp_val');
+        this.valueCompanyArr = this.node.parent.getChildByName('boss').getComponent('bossController').valueCompanyArr;
     },
 
+    // start () {
+    // },
+
     sub(hurt) {
-        let fill_start = this.hpNode.getComponent(cc.Sprite);
-        fill_start.fillStart = fill_start.fillStart + hurt / this.hpVal;
-        hurt = parseInt(this.hpValNode.getComponent(cc.Label).string) - hurt;
-        if(hurt < 0){
-            return 0;
+        var fill_start = this.hpNode.getComponent(cc.Sprite);
+        this.realHpVal -= hurt;
+        fill_start.fillStart = (1 - this.realHpVal / this.hpVal);
+        if (this.realHpVal <= 0) {
+            this.realHpVal = 0;
         }
-        this.hpValNode.getComponent(cc.Label).string = hurt;
-        return hurt;
+        var map = this.valTrans(this.realHpVal);
+        this.hpValNode.getComponent(cc.Label).string = this.fixed(map.value) + this.valueCompanyArr[map.index];
+        return this.realHpVal;
     },
 
     initNode(level) {
         this.hpNode.getComponent(cc.Sprite).fillStart = 0;
-        this.hpVal = level * 10;
-        this.hpValNode.getComponent(cc.Label).string = this.hpVal;
+        this.realHpVal = this.hpVal = level * 10;
+        var map = this.valTrans(this.hpVal);
+        this.hpValNode.getComponent(cc.Label).string = this.fixed(map.value) + this.valueCompanyArr[map.index];
+    },
+
+    /**
+     * 数值转换
+     * @param {*} value 原始值 
+     * @param {*} index 数值单位
+     */
+    valTrans(value, index = 0) {
+        if (value > 1000) {
+            value = value / 1000;
+            index++;
+            var map = this.valTrans(value, index);
+            value = map.value;
+            index = map.index;
+        }
+        return { value, index };
+    },
+    /**
+     * 两位小数转换
+     * @param {*} value 
+     */
+    fixed(value) {
+        if (value === 'number' && value % 1 === 0) {
+            return value;
+        }
+
+        value = parseFloat(parseFloat(value).toFixed(2));
+        return value;
     }
     // update (dt) {},
 });

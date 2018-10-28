@@ -27,6 +27,10 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        blackMask: {
+            default: null,
+            type: cc.Node
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -34,7 +38,18 @@ cc.Class({
     // onLoad () {},
 
     start () {
-
+        
+    },
+    switchBackground(path) {
+        var node = this.node;
+        var blackMask = this.blackMask;
+        var switchActIn = cc.sequence(cc.fadeIn(1),cc.callFunc(function(){
+            cc.loader.loadRes(path, cc.SpriteFrame, function (err, spriteFrame) {
+                node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+            });
+            blackMask.runAction(cc.fadeOut(0.5));
+        })) 
+        blackMask.runAction(switchActIn);
     },
 
     // update (dt) {},

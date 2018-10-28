@@ -28,8 +28,8 @@ cc.Class({
         //     }
         // },
         lifeVal: 0,
-        lifeTime: 2,
-        upSpeed: 3
+        lifeTime: 1,
+        upSpeed: 1
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -44,6 +44,8 @@ cc.Class({
         this.lifeVal += dt / this.lifeTime;
         if(this.node.opacity > 1){
             this.node.opacity = (255 * (1 - this.lifeVal));
+        } else{
+            this.node.destroy();
         }
         this.node.y += this.upSpeed;
     },

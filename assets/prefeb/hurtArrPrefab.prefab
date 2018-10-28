@@ -33,9 +33,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 250,
+      "g": 0,
+      "b": 50,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -46,7 +46,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 49,
+      "width": 99,
       "height": 40
     },
     "_rotationX": 0,
@@ -77,15 +77,15 @@
     "_actualFontSize": 20,
     "_fontSize": 20,
     "_lineHeight": 40,
-    "_enableWrapText": true,
+    "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "Label",
+    "_N$string": "0",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_N$overflow": 1
   },
   {
     "__type__": "e4d28pLd1FCvrbKhF7uYDOq",
@@ -96,8 +96,8 @@
     },
     "_enabled": true,
     "lifeVal": 0,
-    "lifeTime": 2,
-    "upSpeed": 2
+    "lifeTime": 1,
+    "upSpeed": 1
   },
   {
     "__type__": "cc.PrefabInfo",

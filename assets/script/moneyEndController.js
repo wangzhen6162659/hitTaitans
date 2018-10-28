@@ -31,15 +31,19 @@ cc.Class({
         moneyAllVal: 0,
         //定时
         time: 0,
-        //金币浮点标记
-        floatTag: false
+        //转换常量
+        valueCompanyArr: {
+            default: null,
+            type: ['String']
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
+    onLoad() {
+    },
     start() {
+        this.valueCompanyArr = this.node.parent.getComponent('bossController').valueCompanyArr;
         this.node.zIndex = 1001;
     },
 
@@ -50,15 +54,35 @@ cc.Class({
     update(dt) {
         this.time += dt
         var moneyValNode = this.node.getChildByName('moneyVal').getComponent(cc.Label);
-        var thisVal = this.transMoney(moneyValNode.string);
-        if (thisVal < this.transMoney(this.moneyAllVal)) {
-            var difference = this.fixed((this.moneyAllVal - thisVal) * this.time * 3);
-            var thisValFix = this.fixed(thisVal);
-            if (thisValFix + difference > this.moneyAllVal) {
-                difference = this.moneyAllVal - thisValFix;
+        var company = this.valueCompanyArr.indexOf(moneyValNode.string.charAt(moneyValNode.string.length - 1));
+        var thisVal = parseFloat(moneyValNode.string.substring(0, moneyValNode.string.length));
+
+        //这是用来表示单位去除运算的变量
+        var tempMoneyCompeny = company == 0 ? 1 : Math.pow(1000,company);
+        if (thisVal < this.fixed(this.moneyAllVal / tempMoneyCompeny)) {
+            var difference = this.fixed((this.moneyAllVal / tempMoneyCompeny - thisVal) * this.time * 3);
+            // var thisValFix = this.fixed(thisVal);
+            if (thisVal + difference > this.moneyAllVal / tempMoneyCompeny) {
+                difference = this.moneyAllVal / tempMoneyCompeny - thisVal;
             }
-            moneyValNode.string = this.fixed(thisValFix + difference);
+            var map = this.valTrans(thisVal * tempMoneyCompeny + difference * tempMoneyCompeny);
+            moneyValNode.string = this.fixed(map.value) + this.valueCompanyArr[map.index];
         }
+    },
+    /**
+    * 数值转换
+    * @param {*} value 原始值 
+    * @param {*} index 数值单位
+    */
+    valTrans(value, index = 0) {
+        if (value > 1000) {
+            value = value / 1000;
+            index++;
+            var map = this.valTrans(value, index);
+            value = map.value;
+            index = map.index;
+        }
+        return { value, index };
     },
     transMoney(str) {
         //转换金额
@@ -66,14 +90,10 @@ cc.Class({
         str = parseFloat(str);
         return str;
     },
-    fixed (value) {
-        if (value === 'number' && obj%1 === 0){
+    fixed(value) {
+        if (value === 'number' && value % 1 === 0) {
             return value;
         }
-        if (!this.floatTag){
-            return parseInt(value);
-        }
-
         value = parseFloat(parseFloat(value).toFixed(2));
         return value;
     }
