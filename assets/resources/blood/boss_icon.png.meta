@@ -1,14 +1,14 @@
 {
   "ver": "2.0.0",
-  "uuid": "c4c42bb1-df5d-4f1e-8ba6-ce8c3c2c6546",
+  "uuid": "95fe40f6-822e-4e7f-aa3d-a5f327c32a1f",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "blood_back": {
+    "boss_icon": {
       "ver": "1.0.3",
-      "uuid": "7ec0f1e5-9b0b-46fc-85c5-e754b7a7cebe",
-      "rawTextureUuid": "c4c42bb1-df5d-4f1e-8ba6-ce8c3c2c6546",
+      "uuid": "113b54c7-c0b4-4976-b799-594e49b9d3a3",
+      "rawTextureUuid": "95fe40f6-822e-4e7f-aa3d-a5f327c32a1f",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 360,
-      "height": 37,
-      "rawWidth": 360,
-      "rawHeight": 37,
+      "width": 95,
+      "height": 112,
+      "rawWidth": 95,
+      "rawHeight": 112,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

@@ -41,6 +41,11 @@ cc.Class({
             default: null,
             type: ['String']
         },
+
+        bossTimeNode: {
+            default: null,
+            type: cc.Node
+        },
         //血条总长比
         hp: 0,
         //血条背景
@@ -49,6 +54,8 @@ cc.Class({
         hpVal: 0,
         //血条数值总量
         realHpVal: 0,
+        //boss血条时间
+        time: 30
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -56,6 +63,8 @@ cc.Class({
     onLoad() {
         this.hpNode = this.node.getChildByName('blood');
         this.hpValNode = this.node.getChildByName('hp_val');
+        this.bossTimeNode = this.node.getChildByName('boss_time');
+        this.bossTimeNode.zIndex = -1;
         this.valueCompanyArr = this.node.parent.getChildByName('boss').getComponent('bossController').valueCompanyArr;
     },
 
@@ -65,7 +74,7 @@ cc.Class({
     sub(hurt) {
         var fill_start = this.hpNode.getComponent(cc.Sprite);
         this.realHpVal -= hurt;
-        fill_start.fillStart = (1 - this.realHpVal / this.hpVal);
+        fill_start.fillStart = this.realHpVal / this.hpVal;
         if (this.realHpVal <= 0) {
             this.realHpVal = 0;
         }
@@ -75,7 +84,8 @@ cc.Class({
     },
 
     initNode(level) {
-        this.hpNode.getComponent(cc.Sprite).fillStart = 0;
+        this.bossTimeNode.active = false;
+        this.hpNode.getComponent(cc.Sprite).fillStart = 1;
         this.realHpVal = this.hpVal = level * 10;
         var map = this.valTrans(this.hpVal);
         this.hpValNode.getComponent(cc.Label).string = this.fixed(map.value) + this.valueCompanyArr[map.index];
@@ -107,6 +117,27 @@ cc.Class({
 
         value = parseFloat(parseFloat(value).toFixed(2));
         return value;
-    }
-    // update (dt) {},
+    },
+    /**
+     * boss时间条初始化
+     */
+    bossTime() {
+        this.bossTimeNode.active = true;
+        this.bossTimeNode.getComponent(cc.Sprite).fillStart = 1;
+    },
+    /**
+     * boss时间条递减
+     * @param {*} dt 
+     */
+    bossTimeSub(dt) {
+        if (this.bossTimeNode.active == true) {
+            this.bossTimeNode.getComponent(cc.Sprite).fillStart -= dt / 30;
+            if (this.bossTimeNode.getComponent(cc.Sprite).fillStart < 0) {
+                this.bossTimeNode.active = false;
+            }
+        }
+    },
+    update(dt) {
+        this.bossTimeSub(dt);
+    },
 });

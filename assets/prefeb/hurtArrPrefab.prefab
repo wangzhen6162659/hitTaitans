@@ -33,9 +33,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 0,
-      "b": 50,
+      "r": 245,
+      "g": 235,
+      "b": 237,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -46,8 +46,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 99,
-      "height": 40
+      "width": 290,
+      "height": 83
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -77,11 +77,13 @@
     "_actualFontSize": 20,
     "_fontSize": 20,
     "_lineHeight": 40,
-    "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_enableWrapText": true,
+    "_N$file": {
+      "__uuid__": "f9205143-29fd-4b4e-8ece-5b314268f73d"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "0",
+    "_N$string": "dsdsds",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",

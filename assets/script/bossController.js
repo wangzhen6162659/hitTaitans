@@ -79,6 +79,11 @@ cc.Class({
         },
         spriteAnimation: 'Sprite',
         bossScale: 1,
+        bossNameLabel: {
+            default: null,
+            type: cc.Node
+        },
+        bossNames: ["String"]
 
     },
 
@@ -88,6 +93,7 @@ cc.Class({
         this.attackEffNode.zIndex = 1001;
         this.attackedArr = ["待机", "被攻击"];
         this.valueCompanyArr = [" ", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"];
+        this.bossNames = ["奥巴马", "UZI"];
     },
     start() {
         this.addBoss();
@@ -113,7 +119,7 @@ cc.Class({
             this.scheduleOnce(function () {
                 //     // 这里的 this 指向 component
                 this.createBoss();
-            }, 1.5);
+            }, 1.0);
         } else {
             this.createBoss();
         }
@@ -125,7 +131,9 @@ cc.Class({
         var bossLevel = this.level;
         this.boss = cc.instantiate(this.bossPrefeb);
         this.boss.zIndex = 1000;
+        var isBigBoss = false;
         if (this.level % this.mlevelMax == 0) {
+            isBigBoss = true;
             this.bossScale = scale * 1.5
             scale = this.bossScale;
             bossLevel = bossLevel * 10;
@@ -133,12 +141,16 @@ cc.Class({
         }
         var bossType = this.level % 2 + 1;
         var skeStr = 'sprint/boss' + bossType;
-        this.node.addChild(this.boss)
+        this.bossNameLabel.getComponent(cc.Label).string = this.bossNames[bossType-1];
+        this.node.addChild(this.boss);
         this.boss.scale = 0;
         var act = cc.scaleTo(0.3, scale, scale);
         this.boss.runAction(act)
         this.getDragon(this.boss.getComponent(dragonBones.ArmatureDisplay), skeStr, 'Armature', this.attackedArr[0]);
         this.bloodStrip.getComponent('bloodLife').initNode(Math.pow(bossLevel, 2));
+        if (isBigBoss){
+            this.bloodStrip.getComponent('bloodLife').bossTime();
+        }
     },
     getDragon(animationDisplay, path, armatureName, newAnimation) {
         cc.loader.loadResDir(path, function (err, assets) {
@@ -153,7 +165,7 @@ cc.Class({
                     animationDisplay.dragonAtlasAsset = asset;
                 }
             });
-            if(animationDisplay != null){
+            if (animationDisplay != null) {
                 animationDisplay.armatureName = armatureName;
                 animationDisplay.playAnimation(newAnimation, 0);
             }
@@ -278,13 +290,19 @@ cc.Class({
         this.loadDragonBones(animation, this.spriteAnimation, this.spriteAnimation, this.attackEffNodeAction);
     },
     normalAction: function (call) {
-        this.boss.getComponent(dragonBones.ArmatureDisplay).playAnimation(this.attackedArr[0], 0);
+        if (this.boss != null) {
+            this.boss.getComponent(dragonBones.ArmatureDisplay).playAnimation(this.attackedArr[0], 0);
+        }
     },
     smokeNormalAction: function (call) {
-        this.smokeNode.active = false;
+        if (this.smokeNode != null) {
+            this.smokeNode.active = false;
+        }
     },
     attackEffNodeAction: function (call) {
-        this.attackEffNode.active = false;
+        if (this.attackEffNode != null) {
+            this.attackEffNode.active = false;
+        }
     }
     // update (dt) {},
 });
