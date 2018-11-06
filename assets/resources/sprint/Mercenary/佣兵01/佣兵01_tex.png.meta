@@ -1,0 +1,30 @@
+{
+  "ver": "2.0.0",
+  "uuid": "84fedf0f-d90a-43cb-9e36-84073e09df72",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "佣兵01_tex": {
+      "ver": "1.0.3",
+      "uuid": "f0ae7ea2-80d6-4627-ba78-8d490e175d2e",
+      "rawTextureUuid": "84fedf0f-d90a-43cb-9e36-84073e09df72",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -21.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 211,
+      "height": 254,
+      "rawWidth": 256,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

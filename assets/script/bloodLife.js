@@ -83,6 +83,15 @@ cc.Class({
         return this.realHpVal;
     },
 
+    subByMercenary(hurt) {
+        var fill_start = this.hpNode.getComponent(cc.Sprite);
+        this.realHpVal -= hurt;
+        fill_start.fillStart = this.realHpVal / this.hpVal;
+        if (this.realHpVal <= 0) {
+            this.realHpVal = 0;
+        }
+    },
+
     initNode(level) {
         this.bossTimeNode.active = false;
         this.hpNode.getComponent(cc.Sprite).fillStart = 1;

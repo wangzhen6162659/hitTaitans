@@ -7,7 +7,6 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
 cc.Class({
     extends: cc.Component,
 
@@ -92,10 +91,12 @@ cc.Class({
     onLoad() {
         this.attackEffNode.zIndex = 1001;
         this.attackedArr = ["待机", "被攻击"];
-        this.valueCompanyArr = [" ", "K", "M", "G", "T", "P", "E", "Z", "Y", "B", "N", "D"];
+        this.valueCompanyArr = [" ", "k", "m", "g", "t", "p", "e", "z", "y", "b", "n", "d"];
         this.bossNames = ["奥巴马", "UZI"];
     },
     start() {
+        // var a = baseUtil.getName();
+        // this.level = baseUtil.age;
         this.addBoss();
     },
 
@@ -108,6 +109,7 @@ cc.Class({
             this.switchBackground();
         }
     },
+    
     /**
      * 场景切换 表识为2
      */
@@ -119,7 +121,7 @@ cc.Class({
             this.scheduleOnce(function () {
                 //     // 这里的 this 指向 component
                 this.createBoss();
-            }, 1.0);
+            }, 0.5);
         } else {
             this.createBoss();
         }
@@ -192,9 +194,9 @@ cc.Class({
             //简化大数字
             var newVal = this.bloodStrip.getComponent('bloodLife').sub(hurt);
             this.addHurt(hurt, fontSize);
-            if (newVal == 0) {
-                this.destroyBoss();
-            }
+            // if (newVal == 0) {
+            //     this.destroyBoss();
+            // }
         }
     },
     /**
@@ -223,7 +225,9 @@ cc.Class({
                 this.addBoss();
             }
         }, this));
-        this.boss.runAction(actSquen)
+        if (this.boss != null){
+            this.boss.runAction(actSquen)
+        }
     },
     /**
      * 获取当前boss信息
@@ -303,6 +307,10 @@ cc.Class({
         if (this.attackEffNode != null) {
             this.attackEffNode.active = false;
         }
-    }
-    // update (dt) {},
+    },
+    update (dt) {
+        if(this.bloodStrip.getComponent('bloodLife').realHpVal == 0){
+            this.destroyBoss();
+        }
+    },
 });
