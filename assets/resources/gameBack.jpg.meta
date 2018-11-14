@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "95fe40f6-822e-4e7f-aa3d-a5f327c32a1f",
+  "uuid": "d537d6bb-b685-4a12-b033-f6cf715ee543",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "boss_icon": {
+    "gameBack": {
       "ver": "1.0.3",
-      "uuid": "113b54c7-c0b4-4976-b799-594e49b9d3a3",
-      "rawTextureUuid": "95fe40f6-822e-4e7f-aa3d-a5f327c32a1f",
+      "uuid": "22f67f08-5dde-419c-bed3-2664ffe3a302",
+      "rawTextureUuid": "d537d6bb-b685-4a12-b033-f6cf715ee543",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 95,
-      "height": 112,
-      "rawWidth": 95,
-      "rawHeight": 112,
+      "width": 720,
+      "height": 1280,
+      "rawWidth": 720,
+      "rawHeight": 1280,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

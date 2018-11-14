@@ -7,6 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var GameConfig = require("GameConfig");
 cc.Class({
     extends: cc.Component,
 
@@ -72,10 +73,6 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        attackEffNode: {
-            default: null,
-            type: cc.Node
-        },
         spriteAnimation: 'Sprite',
         bossScale: 1,
         bossNameLabel: {
@@ -83,16 +80,15 @@ cc.Class({
             type: cc.Node
         },
         bossNames: ["String"]
-
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        this.attackEffNode.zIndex = 1001;
         this.attackedArr = ["待机", "被攻击"];
         this.valueCompanyArr = [" ", "k", "m", "g", "t", "p", "e", "z", "y", "b", "n", "d"];
         this.bossNames = ["奥巴马", "UZI"];
+        this.level = GameConfig.GameCore;
     },
     start() {
         // var a = baseUtil.getName();
@@ -186,7 +182,6 @@ cc.Class({
             fontSize = 20;
         }
         if (this.boss != null && this.boss != undefined) {
-            this.attackEffNodeAnim();
             var _armatureDisplay = this.boss.getComponent(dragonBones.ArmatureDisplay);
             if (_armatureDisplay.animationName == this.attackedArr[0]) {
                 this.loadDragonBones(_armatureDisplay, 'Armature', this.attackedArr[1], this.normalAction);
@@ -221,6 +216,7 @@ cc.Class({
                     this.node.addChild(moneyPrefab);
                 }
                 this.level += 1;
+                GameConfig.GameCore +=1 ;
                 this.levelValue = Math.pow(this.level, 3);
                 this.addBoss();
             }
@@ -268,30 +264,15 @@ cc.Class({
         }
         return { value, index };
     },
-    /**
-     * 动态加载龙骨
-     * @param animationDisplay  龙骨组件
-     * @param armatureName      Armature名称
-     * @param newAnimation      Animation名称
-     * @param completeCallback  动画播放完毕的回调
-     * @param playTimes         播放次数 -1是根据龙骨文件 0五险循环 >0是播放次数
-     */
-    loadDragonBones(animationDisplay, armatureName, newAnimation, retfunction, playTimes = 1) {  //动态加载龙骨
-        animationDisplay.armatureName = armatureName;
-        animationDisplay.playAnimation(newAnimation, playTimes);
-        animationDisplay.addEventListener(dragonBones.EventObject.COMPLETE, retfunction, this);
-    },
     smokeNodeAnim() {
         this.smokeNode.active = true;
         var animation = this.smokeNode.getComponent(dragonBones.ArmatureDisplay);
         this.loadDragonBones(animation, this.spriteAnimation, this.spriteAnimation, this.smokeNormalAction);
     },
-    attackEffNodeAnim() {
-        var rat = Math.floor(Math.random() * 360 + 0);
-        this.attackEffNode.rotation = rat;
-        this.attackEffNode.active = true;
-        var animation = this.attackEffNode.getComponent(dragonBones.ArmatureDisplay);
-        this.loadDragonBones(animation, this.spriteAnimation, this.spriteAnimation, this.attackEffNodeAction);
+    loadDragonBones(animationDisplay, armatureName, newAnimation, retfunction, playTimes = 1) {  //动态加载龙骨
+        animationDisplay.armatureName = armatureName;
+        animationDisplay.playAnimation(newAnimation, playTimes);
+        animationDisplay.addEventListener(dragonBones.EventObject.COMPLETE, retfunction, this);
     },
     normalAction: function (call) {
         if (this.boss != null) {
@@ -304,6 +285,7 @@ cc.Class({
         }
     },
     attackEffNodeAction: function (call) {
+        console.log(call)
         if (this.attackEffNode != null) {
             this.attackEffNode.active = false;
         }

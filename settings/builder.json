@@ -6,7 +6,7 @@
   "fb-instant-games": {},
   "includeAnySDK": false,
   "includeSDKBox": false,
-  "inlineSpriteFrames": true,
+  "inlineSpriteFrames": false,
   "inlineSpriteFrames_native": false,
   "jailbreakPlatform": false,
   "md5Cache": true,
@@ -26,15 +26,15 @@
     "orientation": "portrait"
   },
   "renderMode": "0",
-  "startScene": "04783e25-1c64-4020-8aa4-f77eda1f22cd",
+  "startScene": "ff6db841-4a6b-4a48-ae6e-3b0ca51d283e",
   "title": "hitTaitans",
-  "webOrientation": "auto",
+  "webOrientation": "portrait",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
-    "appid": "wx6ac3f5090a6b99c5",
+    "appid": "wxfbb3cfa53e4a9a36",
     "isSubdomain": false,
     "orientation": "portrait",
-    "subContext": ""
+    "subContext": "watchoutRank"
   },
   "xxteaKey": "d57c1ebd-f6e1-49",
   "zipCompressJs": true
